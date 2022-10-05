@@ -1,8 +1,7 @@
-import { React } from "react";
 // import {  } from "module";
 
-import { Card } from "../../shared/components/UIElements/Card";
-import { PlaceItem } from "./PlaceItem";
+import Card from "../../shared/components/UIElements/Card";
+import PlaceItem from "./PlaceItem";
 import "./PlaceList.css";
 
 const PlaceList = (props) => {
@@ -18,11 +17,11 @@ const PlaceList = (props) => {
   }
   return (
     <ul className="place-list">
-      {props.item.map((place) => (
+      {props.items.map((place) => (
         <PlaceItem
           key={place.id}
           id={place.id}
-          image={place.imageURL}
+          image={place.imageUrl}
           title={place.title}
           description={place.description}
           address={place.address}

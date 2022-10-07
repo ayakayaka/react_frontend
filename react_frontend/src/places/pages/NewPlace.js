@@ -7,21 +7,36 @@ import {
 } from "../../shared/util/validators";
 import "./NewPlace.css";
 
-const formReducer = (state, action) => {};
+const formReducer = (state, action) => {
+  switch (action.type) {
+    case "INPUT_CHANGE":
+      let formIsValid = true;
+      for (const inputId in state.inputs) {
+        if (inputId === action.inputId) {
+          formIsValid = formIsValid && action.valid;
+        } else {
+          formIsValid = formIsValid && state.inputs[inputId].isValue;
+        }
+      }
+      return {};
+    default:
+      return state;
+  }
+};
 
 const NewPlace = () => {
   useReducer(formReducer, {
     inputs: {
       title: {
-        value: '',
-        isValid: false
+        value: "",
+        isValid: false,
       },
-    description: {
-        value: '',
-        isValid: false
-      }
-    }
-    isValid:
+      description: {
+        value: "",
+        isValid: false,
+      },
+    },
+    isValid: false,
   });
 
   const titleInputHandler = useCallback((id, value, isValid) => {}, []);

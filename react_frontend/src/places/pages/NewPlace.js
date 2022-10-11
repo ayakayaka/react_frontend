@@ -13,12 +13,18 @@ const formReducer = (state, action) => {
       let formIsValid = true;
       for (const inputId in state.inputs) {
         if (inputId === action.inputId) {
-          formIsValid = formIsValid && action.valid;
+          formIsValid = formIsValid && action.isValid;
         } else {
-          formIsValid = formIsValid && state.inputs[inputId].isValue;
+          formIsValid = formIsValid && state.inputs[inputId].isValid;
         }
       }
-      return {};
+      return {
+        ...state,
+        input: {
+          ...state.inputs,
+          [action.inputId]: { value: action.value, isValid: action.isValid },
+        },
+      };
     default:
       return state;
   }
